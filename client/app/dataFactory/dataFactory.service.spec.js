@@ -3,7 +3,7 @@
 describe('Service: dataFactory', function () {
 
   // load the service's module
-  beforeEach(module('datepickerApp'));
+  beforeEach(module('apiIntegrationApp'));
 
   // instantiate service
   var dataFactory;
