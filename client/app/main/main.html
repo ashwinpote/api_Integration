@@ -67,7 +67,7 @@
   </div>
   <div id="authOps" style="display:none">
     <h2>User is now signed in to the app using Google+</h2>
-    <button id="signOut" onclick="auth2.signOut()">Sign Out</button>
+    <button id="signOut" onclick="signOut()">Sign Out</button>
     <p>If the user chooses to disconnect, the app must delete all stored
     information retrieved from Google for the given user.</p>
     <button id="disconnect" >Disconnect your Google account from this app</button>
@@ -173,9 +173,6 @@ var helper = (function() {
   };
 })();
 
-/**
- * jQuery initialization
- */
 $(document).ready(function() {
   $('#disconnect').click(helper.disconnect);
   $('#loaderror').hide();
@@ -198,10 +195,16 @@ var updateSignIn = function() {
   if (auth2.isSignedIn.get()) {
     console.log('signed in');
     helper.onSignInCallback(gapi.auth2.getAuthInstance());
+    console.log(check_logstatus);
   }else{
     console.log('signed out');
     helper.onSignInCallback(gapi.auth2.getAuthInstance());
   }
+}
+
+function signOut(){
+  auth2.signOut();
+  location.reload();
 }
 
 /**
