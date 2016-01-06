@@ -8,7 +8,7 @@ var app = angular.module('apiIntegrationApp', [
   'ui.router',
   'ui.bootstrap'
 ])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider,$stateProvider) {
     $urlRouterProvider
       .otherwise('/');
 
