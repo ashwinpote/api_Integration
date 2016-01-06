@@ -20,7 +20,7 @@ angular.module('apiIntegrationApp').factory('dataFactory', function ($q, $window
         }) 
         return defered.promise;
     };
-     return {
+    return {
         signIn: signIn;
     }
       
