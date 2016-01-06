@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('apiIntegrationApp', [
+var app = angular.module('apiIntegrationApp', [
   'apiIntegrationApp.constants',
   'ngCookies',
   'ngResource',
@@ -12,5 +12,10 @@ angular.module('apiIntegrationApp', [
     $urlRouterProvider
       .otherwise('/');
 
-    $locationProvider.html5Mode(true);
+   $stateProvider
+      .state('main', {
+        url: '/',
+        templateUrl: 'app/main/main.html',
+        controller: 'myController'
+      });
   });
