@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('apiIntegrationApp').factory('GPlusAuthService', function ($q, $window) { 
+angular.module('apiIntegrationApp').factory('dataFactory', function ($q, $window) { 
   
 	var signIn;
     signIn = function () {

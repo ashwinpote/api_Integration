@@ -1,9 +1,9 @@
 'use strict';
 
-app.controller('myController', function ($scope, GPlusAuthService) {
+app.controller('myController', function ($scope, dataFactory) {
     $scope.signIn = function() {
       console.log("signIn");
-        GPlusAuthService.signIn().then(function(response) {
+        dataFactory.signIn().then(function(response) {
 
         });    
     }
