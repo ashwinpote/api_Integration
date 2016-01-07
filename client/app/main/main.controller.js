@@ -1,10 +1,16 @@
 'use strict';
 
-app.controller('myController', function ($scope, dataFactory) {
-    $scope.signIn = function() {
-      console.log("signIn");
-        dataFactory.signIn().then(function(response) {
 
-        });    
-    }
+app.controller('myController', ['$scope', 'GooglePlus', function ($scope, GooglePlus) {
+	$scope.login = function () {
+          GooglePlus.login().then(function (authResult) {
+              console.log(authResult);
+  
+              GooglePlus.getUser().then(function (user) {
+                  console.log(user);
+              });
+          }, function (err) {
+              console.log(err);
+          });
+        };
 });

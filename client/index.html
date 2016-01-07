@@ -24,6 +24,7 @@
   <!-- JavaScript specific to this application that is not related to API
      calls -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
+ 
   <meta name="google-signin-client_id" content="266935583518-0otsvqdm1eekgr9htkca8lfla26k1l90.apps.googleusercontent.com"></meta>
   </head>
   <body ng-app="apiIntegrationApp">
@@ -62,12 +63,27 @@
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
+     <script src="https://rawgithub.com/mrzmyr/angular-google-plus/master/dist/angular-google-plus.min.js"></script>
       <script src="app/app.js"></script>
-      <script src="app/dataFactory/dataFactory.service.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
+       <script src="app/main/angular-google-plus.min.js"></script>
       <!-- injector:js -->
+      <script src="components/util/util.module.js"></script>
+      <script src="app/myroute/myroute.js"></script>
+      <script src="app/main/main.js"></script>
+      <script src="app/myDirective/myDirective.directive.js"></script>
+      <script src="app/myFilter/myFilter.filter.js"></script>
+      <script src="app/myService/myService.service.js"></script>
+      <script src="app/myroute/myroute.controller.js"></script>
+      <script src="app/main/main.controller.js"></script>
+      <script src="app/user/user.controller.js"></script>
+      <script src="components/footer/footer.directive.js"></script>
+      <script src="components/modal/modal.service.js"></script>
+      <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/navbar/navbar.directive.js"></script>
       <script src="app/app.constant.js"></script>
+      <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
   </body>
