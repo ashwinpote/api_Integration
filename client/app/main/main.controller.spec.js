@@ -1,29 +1,31 @@
 'use strict';
 
-describe('Controller: myController', function () {
+describe('Controller: MainController', function() {
 
   // load the controller's module
   beforeEach(module('apiIntegrationApp'));
+  beforeEach(module('stateMock'));
 
-  var myController,
-      scope,
-      $httpBackend;
+  var scope;
+  var MainController;
+  var state;
+  var $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
+  beforeEach(inject(function(_$httpBackend_, $controller, $rootScope, $state) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('/api/things')
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
     scope = $rootScope.$new();
-    myController = $controller('myController', {
+    state = $state;
+    MainController = $controller('MainController', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of things to the scope', function () {
+  it('should attach a list of things to the controller', function() {
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+    expect(MainController.awesomeThings.length).toBe(4);
   });
 });
-

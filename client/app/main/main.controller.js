@@ -1,16 +1,17 @@
 'use strict';
 
+(function() {
 
-app.controller('myController', ['$scope', 'GooglePlus', function ($scope, GooglePlus) {
-	$scope.login = function () {
-          GooglePlus.login().then(function (authResult) {
-              console.log(authResult);
-  
-              GooglePlus.getUser().then(function (user) {
-                  console.log(user);
-              });
-          }, function (err) {
-              console.log(err);
-          });
-        };
-});
+class MainController {
+
+  constructor($http) {
+    this.$http = $http;
+    this.awesomeThings = [];
+
+    $http.get('/api/things').then(response => {
+      this.awesomeThings = response.data;
+    });
+  }
+}
+
+})();
