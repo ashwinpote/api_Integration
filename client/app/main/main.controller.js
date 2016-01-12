@@ -2,19 +2,27 @@
 
 (function() {
 
-class MainController {
+    class MainController {
 
-  constructor($http) {
-    this.$http = $http;
-    this.awesomeThings = [];
+        constructor(twitter,$scope) {
 
-    $http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-    });
-  }
-}
+        	
+            twitter.init();
 
-angular.module('apiIntegrationApp')
-  .controller('MainController', MainController);
+            $scope.search = function() {
+
+            	twitter.search($scope.trends).then(function(data){
+            		console.log(data)
+            		$scope.result=data;
+            	})
+
+            }
+
+
+        }
+    }
+
+    angular.module('apiIntegrationApp')
+        .controller('MainController', MainController);
 
 })();

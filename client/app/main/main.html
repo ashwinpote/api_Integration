@@ -1,97 +1,55 @@
 <!-- <navbar></navbar> -->
-
 <header class="hero-unit" id="banner">
-  <div class="container">
-    <h4>API Integration</h4>
-    <!-- <p class="lead">Kick-start your next web app with Angular Fullstack</p> -->
-    <!-- <img src="assets/images/yeoman.png" alt="I'm Yeoman"> -->
-  </div>
-</header>
-<br><br>
-<div class="container">
-        <!-- Page Header -->
-        <div class="row">
-            <div class="col-lg-12">
-                <form role="form">
-                <div class="form-inline">
-                  <div class="form-group">
-                    <input class="form-control" id="inputdefault" type="text" placeholder="Enter text here">
-                  </div>
-                  <div class="form-group">
-                    <select class="form-control" id="sel1">
-                      <option selected value="">Select api</option>
-                      <option value="Google+">Google+</option>
-                      <option value="Twitter">Twitter</option>
-                      <option value="Facebook">Facebook</option>
-                      <option value="Youtube">Youtubeeee</option>
-                    </select>
-                  </div>
-                  <button type="button" class="btn btn-primary">+</button><br><br> 
-
-
-<script id="entry-template" type="text/x-handlebars-template">
-    <ul id="timeline">
-    {{#each statuses}}
-        <li>
-            <img class="thumbnail" src="{{user.profile_image_url}}" />
-            <span class="content">
-                <span class="author">{{user.name}}</span>
-                <span class="text">{{link text}}</span>
-            </span>
-        </li>
-    {{/each}}
-    </ul>
-</script>
-
-
-<div id="connect">
-    <button class="btn btn-primary" id="btn-connect">Connect with twitter</button><br><br>   
-</div>
-<div id="res">
-    <div class="input-group">
-        <input type="text" class="form-control" id="search" />
-        <span class="input-group-btn">
-            <button class="btn btn-primary" type="button" id="btn-search">Search</button>
-        </span>
+    <div class="container">
+        <h4>API Integration</h4>
+        <!-- <p class="lead">Kick-start your next web app with Angular Fullstack</p> -->
+        <!-- <img src="assets/images/yeoman.png" alt="I'm Yeoman"> -->
     </div>
-    <div id="search-res"></div>
+</header>
+<br>
+<br>
+<div class="container">
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" id="inputdefault" type="text" placeholder="Enter text here">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="sel1">
+                            <option selected value="">Select api</option>
+                            <option value="Google+">Google+</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Youtube">Youtubeeee</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary">+</button>
+                    <br>
+                    <br>
+                    <div id="res">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search" ng-model="trends" />
+                            <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" id="btn-search" ng-click="search()">Search</button>
+        </span>
+                        </div>
+                        <div id="search-res">
+                            <ul id="timeline">
+                                <li ng-repeat="res in result">
+                                    <img class="thumbnail" src="{{res.user.profile_image_url}}" />
+                                    <span class="content">
+                <span class="author">{{res.user.name}}</span>
+                                    <span class="text">{{res.desp}}</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-</div>
-</form>
-</div>
-</div>    
-      
-</div>
-
-
-<script>
-$(document).ready(function(){
-
-$('#btn-connect').click(function() {  
-    //Initialize the SDK with my OAuth.io public key, then display the OAuth authorization form
-    OAuth.initialize('oEcDIQahkO4TUAND-yTs-H6oY_M')
-    OAuth.popup('twitter', function(err, twitter) {    
-        $('#btn-search').click(function() {
-            var search = encodeURIComponent($('#search').val())
-            twitter.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
-                var template = Handlebars.compile($('#entry-template').html())
-                var content = template({
-                    statuses: data.statuses
-                })
-                $('#search-res').html(content)
-            })
-        })
-        $('#btn-search').click()
-    })
-})
-
-//replace URL by html link
-Handlebars.registerHelper('link', function(text)  {
-    var exp = /((https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-    var exp2 = /(@[A-Za-z0-9]+)/ig
-    return new Handlebars.SafeString(text.replace(exp,'<a href="$1">$1</a>').replace())
-})
-
-})
-</script>
-<!-- <footer></footer> -->
