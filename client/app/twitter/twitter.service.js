@@ -14,6 +14,7 @@ angular.module('apiIntegrationApp')
 
                 var search = encodeURIComponent(q)
                 twitter.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
+                	console.log(data);
                     var returnData = data.statuses.map(function(d) {
                         return {desp:d.text}
                     })
@@ -24,9 +25,5 @@ angular.module('apiIntegrationApp')
 
             return deferred.promise;
         }
-
-
-
         return obj
-
     });

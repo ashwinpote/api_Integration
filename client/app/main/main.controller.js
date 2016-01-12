@@ -4,17 +4,17 @@
 
     class MainController {
 
-        constructor(twitter,$scope) {
+        constructor(twitter, $scope) {
 
-        	
+
             twitter.init();
 
             $scope.search = function() {
 
-            	twitter.search($scope.trends).then(function(data){
-            		console.log(data)
-            		$scope.result=data;
-            	})
+                twitter.search($scope.trends).then(function(data) {
+                    console.log(data)
+                    $scope.result = data;
+                })
 
             }
 
