@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('apiIntegrationApp')
+angular.module('app')
     .service('twitter', function($q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var obj = {}
