@@ -6,10 +6,20 @@
 
         constructor(twitter, $scope) {
 
+            $scope.showInputControls = false;
 
-            twitter.init();
+            $scope.onChanged = function(param){
+            //    alert("clk");
+                console.log(param);
+                $scope.showInputControls = true;
+                twitter.init();
+               // twitter.openpopup();
 
-            $scope.search = function() {
+
+            }
+            
+
+          $scope.search = function() {
 
                 twitter.search($scope.trends).then(function(data) {
                     console.log(data)
