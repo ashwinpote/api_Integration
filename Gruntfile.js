@@ -430,7 +430,7 @@ module.exports = function (grunt) {
         'ngconstant'
       ],
       server: [
-        //'newer:babel:client',
+        'newer:babel:client',
         'less',
       ],
       test: [
