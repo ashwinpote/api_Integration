@@ -2,21 +2,41 @@
 
 (function() {
     class MainController {
-        constructor(googleplus, $scope, $window) {
-
-            googleplus.init();
+        constructor(googleplus, twitter, $scope, $window) {
+            var currSelect = "";
+            $scope.showInputControls = false;            
 
             $scope.onChanged = function(param) {
-                $scope.showInputControls = true;
+                currSelect = $scope.optionValue;
+                $scope.trends = "";
+                $scope.result = "";
+                
+                switch (currSelect) {
+                    case "Google+":
+                        googleplus.init().then(function() {
+                            $scope.showInputControls = true;
+                        });
+                        break;
+                    case "Twitter":
+                        twitter.init();
+                        $scope.showInputControls = true;                        
+                        break;
+                }
             }
 
-            $scope.showInputControls = false;
-
             $scope.search = function() {
-                googleplus.search($scope.trends).then(function(data) {
-                    $scope.result = data.items;
-                    console.log(data);
-                })
+                switch (currSelect) {
+                    case "Google+":
+                        googleplus.search($scope.trends).then(function(data) {
+                            $scope.result = data.items;
+                        });
+                        break;
+                    case "Twitter":
+                        twitter.search($scope.trends).then(function(data) {
+                            $scope.result = data;
+                        });
+                        break;
+                }
             }
         }
     }
