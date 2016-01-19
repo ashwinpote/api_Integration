@@ -31,19 +31,19 @@
                     <br>
                     <p>selected val {{data.multipleSelect}}</p>
                     <div class="input-group" ng-show="showInputControls">
-                            <input type="text" class="form-control" id="search" ng-model="trends" />
-                            <span class="input-group-btn">
+                        <input type="text" class="form-control" id="search" ng-model="trends" />
+                        <span class="input-group-btn">
                             <button class="btn btn-primary" type="button" id="btn-search" ng-click="search()">Search</button>
                             </span>
                     </div>
-                    <div id="res">                        
+                    <div id="res">
                         <div id="search-res">
                             <ul id="timeline">
                                 <li ng-repeat="res in result">
                                     <img class="thumbnail" src="{{res.user.profile_image_url}}" />
                                     <span class="content">
-                                    <span class="author">{{res.user.name}}</span>
-                                    <span class="text">{{res.desp}}</span>
+                                    <span class="author">{{res.title}}</span>
+                                    <span class="text">{{res.url}}</span>
                                     </span>
                                 </li>
                             </ul>

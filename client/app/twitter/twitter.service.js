@@ -1,20 +1,21 @@
 'use strict';
 
-angular.module('app')
+angular.module('apiIntegrationApp')
     .service('twitter', function($q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var obj = {}
         obj.init = function() {
-            OAuth.initialize('oEcDIQahkO4TUAND-yTs-H6oY_M')
+            OAuth.initialize('4/X00Lpp6s-kkYy5rq6KsEFG-LmfUR4veHO5Qp1c-k4xs')
         }
         obj.search = function(q) {
             var deferred = $q.defer();
          //   console.log(deferred);
          //   OAuth.redirect('twitter', 'https://api.twitter.com/oauth/authenticate?oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0');
-            OAuth.popup('twitter', function(err, twitter) {
+            OAuth.popup('google', function(err, google) {
 
                 var search = encodeURIComponent(q)
-                twitter.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
+                console.log(google);
+                google.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
                   //  console.log(data);
                     var returnData = data.statuses.map(function(d) {
                         return {

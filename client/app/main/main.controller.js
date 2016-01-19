@@ -1,34 +1,23 @@
 'use strict';
 
 (function() {
-
     class MainController {
+        constructor(googleplus, $scope, $window) {
 
-        constructor(twitter, $scope) {
+            googleplus.init();
+
+            $scope.onChanged = function(param) {
+                $scope.showInputControls = true;
+            }
 
             $scope.showInputControls = false;
 
-            $scope.onChanged = function(param){
-            //    alert("clk");
-                console.log(param);
-                $scope.showInputControls = true;
-                twitter.init();
-               // twitter.openpopup();
-
-
-            }
-            
-
-          $scope.search = function() {
-
-                twitter.search($scope.trends).then(function(data) {
-                    console.log(data)
-                    $scope.result = data;
+            $scope.search = function() {
+                googleplus.search($scope.trends).then(function(data) {
+                    $scope.result = data.items;
+                    console.log(data);
                 })
-
             }
-
-
         }
     }
 
