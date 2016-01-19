@@ -28,6 +28,7 @@
                 switch (currSelect) {
                     case "Google+":
                         googleplus.search($scope.trends).then(function(data) {
+                            console.log(data.items)
                             $scope.result = data.items;
                         });
                         break;
@@ -39,7 +40,6 @@
                 }
             }
             $scope.removeField = function(param){
-
                 $scope.result.splice(param,1);  
             }
         }

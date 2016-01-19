@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('apiIntegrationApp')
-  .filter('myFilter', function () {
-    return function (input) {
-      return 'myFilter filter: ' + input;
-    };
-  });
+    .filter('emptycheckTitle', function() {
+        return function(array) {
+            var filteredArray = [];
+            angular.forEach(array, function(item) {
+                if (item.title) filteredArray.push(item);
+            });
+            return filteredArray;
+        };
+    });
