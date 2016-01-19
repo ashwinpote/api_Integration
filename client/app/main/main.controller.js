@@ -38,6 +38,10 @@
                         break;
                 }
             }
+            $scope.removeField = function(param){
+
+                $scope.result.splice(param,1);  
+            }
         }
     }
 
