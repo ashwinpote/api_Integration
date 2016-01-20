@@ -17,8 +17,8 @@ angular.module('apiIntegrationApp')
                 maxResults: 8
             });
             request.execute(function(response) {
-                console.log(response)
                 deferred.resolve(response);
+                console.log(response)
             });
         });
         return deferred.promise;
