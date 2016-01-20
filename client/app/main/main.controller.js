@@ -3,21 +3,12 @@
     class MainController {
         constructor(googleplus, twitter, youtubeService, $scope, $window) {
             var currSelect = "";
-            $scope.showInputControls = false;
+            $scope.showInputControls = true;
 
             $scope.onChanged = function(param) {
                 currSelect = $scope.optionValue;
                 $scope.trends = "";
                 $scope.result = "";
-
-                // switch (currSelect) {
-                //     case "Google+":
-                //         googleplus.init().then(function() {
-                //             //     $scope.showInputControls = true;
-                //         });
-                //         break;
-
-                // }
             }
 
             $scope.search = function() {
@@ -28,7 +19,6 @@
                             $scope.result = data.items;
                         });
                         });
-                       
                         break;
                     case "Twitter":
                         twitter.search($scope.trends).then(function(data) {
