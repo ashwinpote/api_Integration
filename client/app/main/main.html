@@ -33,24 +33,21 @@
                     <br>
                     <br>
                     <div id="res">
-                        <div id="search-res">
+                        <div id="search-res" style="width:30%">
                             <span class="title_data">
-                            <span>{{ result.title }}</span>
-                            <span ng-repeat="res in result | emptycheckTitle">
+                           
+                            <li ng-repeat="res in mainresult">
+                                <li ng-repeat="r in result">
+                                    {{ r.text }}
+                                </li>
+                            </li>
+                            <!-- <span ng-repeat="res in result">
+                            <span>{{ res.desp }}</span>
                                 <span ng-show="res.desp != null" class="text ">{{res.desp}}</span>
                             <span ng-show="res.title != null" class="title ">{{res.title}}</span>
                             <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">{{res.url}}</a></span>
                             </span>
-                            </span>
-                            <!-- <ul id="timeline">
-                                <li ng-repeat="res in result | emptycheckTitle" class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                                    <span ng-show="res.desp != null" class="text title_data">{{res.desp}}</span>
-                                    <span ng-show="res.title != null" class="title title_data">{{res.title}}</span>
-                                    <span ng-show="res.url != null" class="url title_data"><a ng-href="{{res.url}}" target="_blank">{{res.url}}</a></span>
-                                    <i class="fa fa-times-circle close_btn"></i>
-                                    </span>
-                                </li>
-                            </ul> -->
+                            </span> -->
                         </div>
                     </div>
                 </div>
