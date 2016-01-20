@@ -11,54 +11,35 @@
         <div class="col-lg-12">
             <form role="form">
                 <div class="form-inline">
-                    
-                  
                     <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12">
                         <div class="form-group">
-                        <select class="form-control" id="sel1" ng-model="optionValue" ng-change="onChanged()">
-                            <option selected value="">Select api</option>
-                            <option value="Google+">Google+</option>
-                            <option value="Twitter">Twitter</option>
-                            <option value="Facebook">Facebook</option>
-                            <option value="Youtube">Youtube</option>
-                        </select>
-                    </div>
-
+                            <select class="form-control" id="sel1" ng-model="optionValue" ng-change="onChanged()">
+                                <option selected value="">Select api</option>
+                                <option value="Google+">Google+</option>
+                                <option value="Twitter">Twitter</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Youtube">Youtube</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
-                        
-                            <div class="input-group col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-show="showInputControls">
-                    
-                        <input type="text" class="form-control" id="search" ng-model="trends" />
-                        <span class="input-group-btn">
+                        <div class="input-group col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-show="showInputControls">
+                            <input type="text" class="form-control" id="search" ng-model="trends" />
+                            <span class="input-group-btn">
                             <button class="btn btn-primary" type="button" id="btn-search" ng-click="search()">Search</button>
                             </span>
+                        </div>
                     </div>
-
-                    </div>
-                    
                     <br>
                     <br>
                     <div id="res">
                         <div id="search-res">
-                             <!--<ul id="timeline">
-                                <li ng-repeat="res in result | emptycheckTitle" class="col-md-3 col-lg-3 col-sm-3 col-xs-3" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true}">
-                                    <span class="text">{{res.desp}}</span>
-                                    <span class="title title_data">{{res.title}}<br>
-                                   <a ng-href="{{res.url}}" target="_blank">Read Me >></a></span>
-                                    <i class="fa fa-times-circle close_btn" ng-click="removeField($index)"></i>         
-                                    </span>
-                                </li>
-                            </ul>-->
-                             <ul id="timeline">
+                            <ul id="timeline">
                                 <li ng-repeat="res in result | emptycheckTitle" class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                                  
-                                    <!--<span class="content">
-                                    <span class="author">{{res.user.name}}</span>-->
-                                    <span class="text title_data">{{res.desp}}</span>
-                                    <span class="title title_data">{{res.title}}</span>
+                                    <span ng-show="res.desp != null" class="text title_data">{{res.desp}}</span>
+                                    <span ng-show="res.title != null" class="title title_data">{{res.title}}</span>
+                                    <span ng-show="res.url != null" class="url title_data"><a ng-href="{{res.url}}" target="_blank">{{res.url}}</a></span>
                                     <i class="fa fa-times-circle close_btn"></i>
-                                    <!--  <span class="url">{{res.url}}</span>-->
                                     </span>
                                 </li>
                             </ul>
