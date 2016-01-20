@@ -10,17 +10,14 @@
                 $scope.trends = "";
                 $scope.result = "";
 
-                switch (currSelect) {
-                    case "Google+":
-                        googleplus.init().then(function() {
-                            $scope.showInputControls = true;
-                        });
-                        break;
-                    case "Twitter":
-                        twitter.init();
-                        $scope.showInputControls = true;
-                        break;
-                }
+                // switch (currSelect) {
+                //     case "Google+":
+                //         googleplus.init().then(function() {
+                //             //     $scope.showInputControls = true;
+                //         });
+                //         break;
+
+                // }
             }
 
             $scope.search = function() {
