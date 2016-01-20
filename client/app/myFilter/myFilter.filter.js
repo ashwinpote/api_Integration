@@ -1,3 +1,4 @@
+
 'use strict';
 
 angular.module('apiIntegrationApp')
@@ -5,7 +6,11 @@ angular.module('apiIntegrationApp')
         return function(array) {
             var filteredArray = [];
             angular.forEach(array, function(item) {
-                if (item.title) filteredArray.push(item);
+            	if (item.title){
+                	filteredArray.push(item);
+                }else if(item.desp){
+					filteredArray.push(item);
+                } 
             });
             return filteredArray;
         };
