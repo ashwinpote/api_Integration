@@ -71,7 +71,7 @@ angular.module('apiIntegrationApp')
                     'query': "" + search + "",
                     'orderBy': 'best',
                     'sortBy': 'recent',
-                    'maxResults': '20'
+                    'maxResults': '5'
                 }
             });
             request.then(function(resp) {
