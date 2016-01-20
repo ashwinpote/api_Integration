@@ -12,7 +12,7 @@ angular.module('apiIntegrationApp')
                 OAuth.popup('twitter', function(err, twitter) {
                     obj.twitter=twitter;
                     var search = encodeURIComponent(q)
-                    twitter.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
+                    twitter.get('/1.1/search/tweets.json?q=' + search+'&count=5').done(function(data) {
                         console.log(data);
                         var returnData = data.statuses.map(function(d) {
                             return {
@@ -26,7 +26,7 @@ angular.module('apiIntegrationApp')
             else {
 
                 var search = encodeURIComponent(q)
-                obj.twitter.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
+                obj.twitter.get('/1.1/search/tweets.json?q=' + search+'&count=5').done(function(data) {
                     console.log(data);
                     var returnData = data.statuses.map(function(d) {
                         return {

@@ -33,21 +33,18 @@
                     <br>
                     <br>
                     <div id="res">
-                        <div id="search-res" style="width:30%">
-                            <span class="title_data">
-                           
-                            <li ng-repeat="res in mainresult">
-                                <li ng-repeat="r in result">
-                                    {{ r.text }}
-                                </li>
-                            </li>
-                            <!-- <span ng-repeat="res in result">
-                            <span>{{ res.desp }}</span>
-                                <span ng-show="res.desp != null" class="text ">{{res.desp}}</span>
-                            <span ng-show="res.title != null" class="title ">{{res.title}}</span>
-                            <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">{{res.url}}</a></span>
-                            </span>
-                            </span> -->
+                        <div id="search-res">
+                            <span ng-repeat="subarr in mainresult">
+                                <span class="title_data">
+                                        <span ng-repeat="res in subarr">
+                                            <span>{{ res.desp }}</span>
+                                            <span ng-show="res.desp != null" class="text ">{{res.desp}}</span>
+                                            <span ng-show="res.title != null" class="title ">{{res.title}}</span>
+                                            <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">Read more>>></a></span><br>
+                                        </span>
+                                         <i style="position:relative !important" class="fa fa-times-circle close_btn" ng-click="removeField($index)"></i>
+                                </span>                            
+                            </span>                            
                         </div>
                     </div>
                 </div>

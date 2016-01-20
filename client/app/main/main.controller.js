@@ -17,25 +17,23 @@
                         googleplus.init().then(function(data) {
                             googleplus.search($scope.trends).then(function(data) {
                                 currArr.push(data.items);
-                                $scope.result = data.items;
                                 $scope.mainresult = currArr;
-                                console.log($scope.result)
-                                 console.log($scope.mainresult)
+                               
                             });
                         })
                         break;
                     case "Twitter":
                         twitter.search($scope.trends).then(function(data) {
                             currArr.push(data);
-                            $scope.result = currArr;
-                            console.log(currArr);
+                            $scope.mainresult = currArr;
                         });
                         break;
                 }
 
             }
-            $scope.removeField = function(param) {
-                $scope.result.splice(param, 1);
+            $scope.removeField = function(param) {                
+                $scope.mainresult.splice(param, 1);
+                currArr = $scope.mainresult;                
             }
         }
     }
