@@ -1,7 +1,7 @@
 'use strict';
 (function() {
     class MainController {
-        constructor(googleplus, twitter, $scope, $window) {
+        constructor(googleplus, twitter, youtubeService, $scope, $window) {
             var currSelect = "";
             $scope.showInputControls = false;
 
@@ -23,15 +23,24 @@
             $scope.search = function() {
                 switch (currSelect) {
                     case "Google+":
-                        googleplus.search($scope.trends).then(function(data) {
+                    googleplus.init().then(function() {
+                             googleplus.search($scope.trends).then(function(data) {
                             $scope.result = data.items;
                         });
+                        });
+                       
                         break;
                     case "Twitter":
                         twitter.search($scope.trends).then(function(data) {
                             $scope.result = data;
                         });
                         break;
+                    case "Youtube":
+                        youtubeService.search($scope.trends).then(function(data) {
+                            $scope.result = data.items;
+                        });
+                        break;
+
                 }
             }
             $scope.removeField = function(param) {

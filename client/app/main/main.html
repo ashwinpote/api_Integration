@@ -35,18 +35,18 @@
                     <div id="res">
                         <div id="search-res">
                             <ul id="timeline">
-                                <li ng-repeat="res in result | emptycheckTitle" class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                                <li ng-repeat="res in result" class="col-md-3 col-lg-3 col-sm-3 col-xs-3">                                    
                                     <span ng-show="res.desp != null" class="text title_data">{{res.desp}}</span>
-                                    <span ng-show="res.title != null" class="title title_data">{{res.title}}</span>
+                                    <span ng-show="res.title != null" class="title title_data">{{res.title}}</span>    
+                                    <span ng-show="res.snippet.description != null" class="title title_data">{{res.snippet.description}}</span>
                                     <span ng-show="res.url != null" class="url title_data"><a ng-href="{{res.url}}" target="_blank">{{res.url}}</a></span>
                                     <i class="fa fa-times-circle close_btn"></i>
                                     </span>
                                 </li>
-                            </ul>
+                            </ul >
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</div>
