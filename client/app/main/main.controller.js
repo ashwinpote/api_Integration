@@ -1,7 +1,7 @@
 'use strict';
 (function() {
     class MainController {
-        constructor(googleplus, twitter, $scope, $window) {
+        constructor(googleplus, twitter, youtubeService, $scope, $window) {
             var currSelect = "";
             var collObj = {};
             $scope.showInputControls = true;
