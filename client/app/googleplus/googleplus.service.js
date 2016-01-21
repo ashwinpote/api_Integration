@@ -5,6 +5,7 @@ angular.module('apiIntegrationApp')
         var deferred = $q.defer();
         var auth_user = false;
         var obj = {}
+        obj.collSearch = [];
         var clientId = '266935583518-0otsvqdm1eekgr9htkca8lfla26k1l90.apps.googleusercontent.com',
             apiKey = 'AIzaSyAnMX4jucCO6omqJLTUZ4lkqZtDUY_cX2o',
             scopes = 'https://www.googleapis.com/auth/plus.me';
@@ -15,7 +16,7 @@ angular.module('apiIntegrationApp')
                     client_id: clientId,
                     scope: scopes,
                     immediate: false
-                }, obj.handleAuthResult);               
+                }, obj.handleAuthResult);
             }
             return deferred.promise;
         }
@@ -71,11 +72,14 @@ angular.module('apiIntegrationApp')
                     'query': "" + search + "",
                     'orderBy': 'best',
                     'sortBy': 'recent',
-                    'maxResults': '20'
+                    'maxResults': '5'
                 }
             });
             request.then(function(resp) {
-                deferred.resolve(resp.result);
+                if (resp.result.items.length > 0) {
+                    obj.collSearch.push(search);
+                    deferred.resolve(resp.result);
+                }
             }, function(reason) {
                 console.log('Error: ' + reason.result.error.message);
             });

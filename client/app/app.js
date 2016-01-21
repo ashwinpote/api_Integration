@@ -7,11 +7,12 @@ angular.module('apiIntegrationApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ngRepeatReorder'
+  'ngDraggable'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+    
   });
