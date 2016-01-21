@@ -37,20 +37,19 @@
 
                            
 
-                            <span ng-repeat="subarr in mainresult">
-                                <span class="title_data">
-                                        <span ng-repeat="res in subarr">
+                             <div ng-repeat-reorder="subarr in mainresult" ng-repeat-reorder-handle="i.fa.fa-bars">
+                                <div class="title_data col-lg-3 col-md-3">               
+                                <i class="fa fa-bars form-control-feedback"></i>                 
+                                        <div ng-repeat="res in subarr">
+                                             
                                             <span>{{ res.desp }}</span>
                                             <span ng-show="res.desp != null" class="text ">{{res.desp}}</span>
                                             <span ng-show="res.title != null" class="title ">{{res.title}}</span>
-                                            <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">Read more>>></a></span>
-                                             <span ng-show="res.snippet.description != null" class="title">{{res.snippet.description}}</span>
-                                             <span ng-show="res.id.videoId != null" class="title"><a ng-href="https://www.youtube.com/watch?v={{res.id.videoId}}" target="_blank">Watch video >>></a></span>
-                                            <br>
-                                        </span>
-                                         <a href="#"><i style="position:relative !important" class="fa fa-times-circle close_btn" ng-click="removeField($index)"></a></i>
-                                </span>                            
-                            </span>                            
+                                            <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">Read more>>></a></span><br>
+                                        </div>
+                                        <i class="fa fa-times-circle close_btn" ng-click="removeField($index)"></i>
+                                </div>                            
+                            </div>                            
 
                         </div>
                     </div>
