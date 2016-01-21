@@ -1,27 +1,27 @@
 'use strict';
 (function() {
     class MainController {
-        constructor(googleplus, twitter, youtubeService, $scope, $window) {
+        constructor(googleplus, twitter, youtubeService, $scope, $location, $window) {
             var currSelect = "";
             var currArr = [];
+            var currSelfLink = [];
             $scope.showInputControls = true;
 
             $scope.onChanged = function(param) {
                 currSelect = $scope.optionValue;
                 $scope.trends = "";
-                $scope.result = "";
             }
 
             $scope.search = function() {
                 switch (currSelect) {
                     case "Google+":
-                    googleplus.init().then(function(data) {
+                        googleplus.init().then(function(data) {
                             googleplus.search($scope.trends).then(function(data) {
                                 currArr.push(data.items);
+                                console.log(googleplus.collSearch);
                                 $scope.mainresult = currArr;
-                               
                             });
-                        })
+                        });
                         break;
                     case "Twitter":
                         twitter.search($scope.trends).then(function(data) {
@@ -29,18 +29,21 @@
                             $scope.mainresult = currArr;
                         });
                         break;
-                    case "Youtube":
-                        youtubeService.search($scope.trends).then(function(data) {
-                            currArr.push(data.items);
-                            $scope.mainresult = currArr;
-                        });
-                        break; 
+                }
             }
-        }
-            $scope.removeField = function(param) {                
+            $scope.onDropComplete = function (index, obj, evt) {
+                var otherObj = $scope.mainresult[index];
+                var otherIndex = $scope.mainresult.indexOf(obj);
+                $scope.mainresult[index] = obj;
+                $scope.mainresult[otherIndex] = otherObj;
+            }
+            $scope.removeField = function(param) {
                 $scope.mainresult.splice(param, 1);
-                currArr = $scope.mainresult;                
-             }
+                currSelfLink.splice(param, 1);
+                currArr = $scope.mainresult;
+                console.log(currArr);
+                console.log(currSelfLink);
+            }
         }
     }
 
