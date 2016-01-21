@@ -23,5 +23,6 @@ angular.module('apiIntegrationApp')
         });
         return deferred.promise;
     };
+    
     return obj;
 });
