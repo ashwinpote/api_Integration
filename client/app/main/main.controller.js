@@ -33,6 +33,13 @@
                             $scope.mainresult = currArr;
                         });
                         break;
+                          case "Youtube":
+                        youtubeService.search($scope.trends).then(function(data) {
+                            currArr.push(data.items);
+                            $scope.mainresult = currArr;
+                           // console.log("data:",$scope.mainresult);
+                        });
+                        break; 
                 }
             }
             $scope.onDropComplete = function(index, obj, evt) {
