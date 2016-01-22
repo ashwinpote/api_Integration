@@ -7,7 +7,8 @@ angular.module('apiIntegrationApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ngDraggable'
+  'ngDraggable',
+  'ngAnimate'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

@@ -25,7 +25,10 @@
 
 
 .title_data{
+
 border: 2px solid gray;
+border-radius: 8px;
+font-size: 14px;
 height: 250px;
 margin: 20px 10px;
 padding: 10px 0 20px 10px;
@@ -41,6 +44,10 @@ font-size: 20px;
 position: absolute;
 right: -14px;
 top: -10px;
+color:black;
+}
+.iconic_color{
+	color:black;
 }
 .title_data a{
  word-wrap:break-word;
@@ -49,10 +56,10 @@ top: -10px;
   width: 23% !important;
 }
 .innerbox{
-height: 100%;
-margin-top: 15px;
+height: 90%;
 overflow-x: hidden;
 overflow-y: auto;
+padding-top: 0px;
 }
 .faicon{
  
@@ -62,3 +69,37 @@ right: 25px;
 top: 5px;
 cursor:pointer;
 }
+.view{
+position: relative; 
+}
+
+.view.ng-enter, .view.ng-leave{
+	transition: All ease-out 0.7s;
+}
+
+.view.ng-enter{
+opacity: 0;
+/* left:-100%; */
+top:-200px;
+}
+
+.view.ng-enter.ng-enter-active{
+opacity: 1;
+/* left: 0; */
+top:0;
+}
+
+.view.ng-leave{
+opacity: 1;
+/* left: 0; */
+top:0;
+}
+
+.view.ng-leave.ng-leave-active{
+opacity: 0;
+top:-50px;
+/* left: -100%; */
+}
+.twitter-color{background:red !important;}
+.facebook-color{background:green !important;} 
+.gplus-color{background:orange !important;} 
