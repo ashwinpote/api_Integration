@@ -16,11 +16,16 @@
                 switch (currSelect) {
                     case "Google+":
                         googleplus.init().then(function(data) {
-                            googleplus.search($scope.trends).then(function(data) {
-                                currArr.push(data.items);
-                                //console.log(googleplus.collSearch);
-                                $scope.mainresult = currArr;
-                            });
+                            var searchText = angular.lowercase($scope.trends);
+                            if (googleplus.collSearch.indexOf(searchText) !== -1) {
+                                alert(searchText+ ' already exists in result list!');
+                            } else {
+                                googleplus.search(searchText).then(function(data) {
+                                    currArr.push(data.items);
+                                    //console.log(googleplus.collSearch);
+                                    $scope.mainresult = currArr;
+                                });
+                            }
                         });
                         break;
                     case "Twitter":
@@ -31,7 +36,7 @@
                         break;
                 }
             }
-            $scope.onDropComplete = function (index, obj, evt) {
+            $scope.onDropComplete = function(index, obj, evt) {
                 var otherObj = $scope.mainresult[index];
                 var otherIndex = $scope.mainresult.indexOf(obj);
                 $scope.mainresult[index] = obj;
