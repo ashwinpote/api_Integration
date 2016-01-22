@@ -2,9 +2,9 @@
 (function() {
     class MainController {
         constructor(googleplus, twitter, youtubeService, $scope, $location, $window) {
+            
             var currSelect = "";
             var currArr = [];
-            var currSelfLink = [];
             $scope.showInputControls = true;
 
             $scope.onChanged = function(param) {
@@ -22,7 +22,6 @@
                             } else {
                                 googleplus.search(searchText).then(function(data) {
                                     currArr.push(data.items);
-                                    //console.log(googleplus.collSearch);
                                     $scope.mainresult = currArr;
                                 });
                             }
@@ -44,10 +43,10 @@
             }
             $scope.removeField = function(param) {
                 $scope.mainresult.splice(param, 1);
-                currSelfLink.splice(param, 1);
+                googleplus.collSearch.splice(param, 1);
                 currArr = $scope.mainresult;
                 console.log(currArr);
-                console.log(currSelfLink);
+                console.log(googleplus.collSearch);
             }
         }
     }

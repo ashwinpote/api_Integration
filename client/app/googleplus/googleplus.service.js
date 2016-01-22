@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('apiIntegrationApp')
-    .service('googleplus', function($q, $interval) {
+.service('googleplus', function ($q, $interval, commonServicegoogleapi) {
         var deferred = $q.defer();
        
         var obj = {}
