@@ -18,7 +18,7 @@
                         googleplus.init().then(function(data) {
                             googleplus.search($scope.trends).then(function(data) {
                                 currArr.push(data.items);
-                                console.log(googleplus.collSearch);
+                                //console.log(googleplus.collSearch);
                                 $scope.mainresult = currArr;
                             });
                         });
