@@ -6,8 +6,8 @@ angular.module('apiIntegrationApp')
             var auth_user = false;
             var obj = {}
             obj.collSearch = [];
-            var clientId = '266935583518-0otsvqdm1eekgr9htkca8lfla26k1l90.apps.googleusercontent.com',
-                apiKey = 'AIzaSyAnMX4jucCO6omqJLTUZ4lkqZtDUY_cX2o',
+            var clientId = '872153603162-mveialviigr5grm7tr0gfukvog9ge7g4.apps.googleusercontent.com',
+                apiKey = 'AIzaSyBbZ7BbFJskR4L7HwZzLanwKvc-nyGqdow',
                 scopes = 'https://www.googleapis.com/auth/plus.me';
 
             obj.init = function() {
@@ -117,8 +117,8 @@ angular.module('apiIntegrationApp')
             return deferred.promise;
         }
 
-        $interval(function() {
-            obj.callapi();
-        }, 20000);
+        // $interval(function() {
+        //     obj.callapi();
+        // }, 20000);
         return obj;
     });
