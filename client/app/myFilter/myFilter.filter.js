@@ -10,6 +10,8 @@ angular.module('apiIntegrationApp')
                 	filteredArray.push(item);
                 }else if(item.desp){
 					filteredArray.push(item);
+                } else if(item.snippet.description){
+                    filteredArray.push(item);
                 } 
             });
             return filteredArray;
