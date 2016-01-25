@@ -33,7 +33,7 @@
                             $scope.mainresult = currArr;
                         });
                         break;
-                          case "Youtube":
+                    case "Youtube":
                         youtubeService.search($scope.trends).then(function(data) {
                             currArr.push(data.items);
                             $scope.mainresult = currArr;
