@@ -33,25 +33,26 @@
                     <br>
                     <br>
                     <div id="res" class="view">
-                    <div id="search-res">                       
+                        <div id="search-res">
                             <div class="draglist">
                                 <div class="title_data col-lg-3 col-md-3 animate view" ng-repeat="subarr in mainresult" ng-drop="true" ng-drag="true" ng-drag-data="subarr" ng-drop-success="onDropComplete($index, $data,$event)">
-                                    <i class="fa fa-bars form-control-feedback iconic_color" ></i>
-                                     <div class="innerbox"> 
-                                    <div ng-repeat="res in subarr | emptycheckTitle">
-                                       
-                                             <span>{{ res.desp }}</span>
-                                            <span ng-show="res.desp != null" class="text ">{{res.desp}}</span>
+                                   <div class="innerbox" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
+                                        <div ng-repeat="res in subarr | emptycheckTitle">
+                                            <span ng-show="res.text != null" class="text ">{{res.text}}</span>
+                                            <span ng-show="res.entities.urls[0].url != null" class="text"><a ng-href="{{ res.entities.urls[0].url }}" target="_blank">Read more >>></a></span>
                                             <span ng-show="res.title != null" class="title ">{{res.title}}</span>
                                             <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">Read more>>></a></span>
-                                            <br><br>
-                                        </div>        
+                                            <span ng-show="res.snippet.description != null" class="title">{{res.snippet.description}}</span>
+                                            <span ng-show="res.id.videoId != null" class="title"><a ng-href="https://www.youtube.com/watch?v={{res.id.videoId}}" target="_blank">Watch video >>></a></span>
+                                            <br>
+                                            <br>
+                                        </div>
                                     </div>
                                     <i class="fa fa-times-circle close_btn" ng-click="removeField($index)"></i>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
             </form>
+            </div>
         </div>
-    </div>

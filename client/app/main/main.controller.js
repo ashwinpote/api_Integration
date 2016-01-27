@@ -2,7 +2,7 @@
 (function() {
     class MainController {
         constructor(googleplus, twitter, youtubeService, $scope, $location, $window) {
-            
+
             var currSelect = "";
             var currArr = [];
             $scope.showInputControls = true;
@@ -15,24 +15,43 @@
             $scope.search = function() {
                 switch (currSelect) {
                     case "Google+":
-                        googleplus.init().then(function(data) {
-                            var searchText = angular.lowercase($scope.trends);
-                            if (googleplus.collSearch.indexOf(searchText) !== -1) {
-                                alert(searchText+ ' already exists in result list!');
-                            } else {
-                                googleplus.search(searchText).then(function(data) {
-                                    currArr.push(data.items);
-                                    $scope.mainresult = currArr;
-                                });
-                            }
-                        });
+                        //googleplus.init().then(function(data) {
+                        var searchText = angular.lowercase($scope.trends);
+                        if (googleplus.collSearch.indexOf(searchText) !== -1) {
+                            alert(searchText + ' already exists in result list!');
+                        } else {
+                            googleplus.search(searchText).then(function(data) {
+                                currArr.push(data.items);
+                                $scope.mainresult = currArr;
+                            });
+                        }
+                        console.log(googleplus.collSearch)
+                        //});
                         break;
                     case "Twitter":
                         twitter.search($scope.trends).then(function(data) {
-                            currArr.push(data);
+                            currArr.push(data.statuses);
+                            console.log(data.statuses)
                             $scope.mainresult = currArr;
                         });
                         break;
+                    case "Youtube":
+                        //youtubeService.init().then(function(data) {
+                        var searchText = angular.lowercase($scope.trends);
+                        if (youtubeService.collSearch.indexOf(searchText) !== -1) {
+                            alert(searchText + ' already exists in result list!');
+                        } else {
+                            youtubeService.search($scope.trends).then(function(data) {
+                                currArr.push(data.items);
+                                $scope.mainresult = currArr;
+                            });
+                        }
+                        console.log(youtubeService.collSearch)
+
+                        //});
+
+                        break;
+
                 }
             }
             $scope.onDropComplete = function(index, obj, evt) {
