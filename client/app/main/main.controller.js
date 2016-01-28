@@ -41,7 +41,7 @@
                         if (youtubeService.collSearch.indexOf(searchText) !== -1) {
                             alert(searchText + ' already exists in result list!');
                         } else {
-                            youtubeService.search($scope.trends).then(function(data) {
+                            youtubeService.search(searchText).then(function(data) {
                                 currArr.push(data.items);
                                 $scope.mainresult = currArr;
                             });
