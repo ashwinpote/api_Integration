@@ -1,0 +1,79 @@
+.title_data{
+/*background: #cee9f9 none repeat scroll 0 0;*/
+border: 2px solid #000;
+border-radius: 8px;
+color: #00;
+font-family: status-bar;
+font-size: 16px;
+height: 250px;
+margin: 20px 10px;
+padding: 10px 0 20px 10px;
+position: relative;
+word-wrap: break-word;
+}
+#timeline li{
+  list-style-type: none;
+  position: relative;
+}
+.close_btn{
+color: black;
+cursor: pointer;
+font-size: 20px;
+position: absolute;
+right: -12px;
+top: -10px;
+}
+.iconic_color{
+ color:black;
+}
+.title_data a{
+ word-wrap:break-word;
+}
+.col-lg-3 {
+  width: 23% !important;
+}
+.innerbox{
+height: 90%;
+
+padding-top: 0px;
+}
+.faicon{
+ 
+font-size: 20px;
+position: absolute;
+right: 25px;
+top: 5px;
+cursor:pointer;
+}
+.view{
+position: relative; 
+}
+
+.view.ng-enter, .view.ng-leave{
+ transition: All ease-out 0.7s;
+}
+
+.view.ng-enter{
+opacity: 0;
+/* left:-100%; */
+top:-200px;
+}
+
+.view.ng-enter.ng-enter-active{
+opacity: 1;
+/* left: 0; */
+top:0;
+}
+
+.view.ng-leave{
+opacity: 1;
+/* left: 0; */
+top:0;
+}
+
+.view.ng-leave.ng-leave-active{
+opacity: 0;
+top:-50px;
+/* left: -100%; */
+}
+.selectbtn{background:#022f5a;color:#fff;}

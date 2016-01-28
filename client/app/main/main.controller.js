@@ -30,9 +30,8 @@
                         if (twitter.collSearch.indexOf(searchText) !== -1) {
                             alert(searchText + ' already exists in result list!');
                         } else {
-                            twitter.search($scope.trends).then(function(data) {
-                                currArr.push(data.statuses);
-                                console.log(data.statuses)
+                            twitter.search(searchText).then(function(data) {
+                                currArr.push(data);
                                 $scope.mainresult = currArr;
                             });
                         }
