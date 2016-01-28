@@ -4,7 +4,8 @@ angular.module('apiIntegrationApp')
     .service('twitter', function($q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var obj = {}
-       
+        obj.collSearch = [];
+
         obj.search = function(q) {
             OAuth.initialize('oEcDIQahkO4TUAND-yTs-H6oY_M')
             var deferred = $q.defer();
@@ -13,16 +14,15 @@ angular.module('apiIntegrationApp')
                     obj.twitter=twitter;
                     var search = encodeURIComponent(q)
                     twitter.get('/1.1/search/tweets.json?q=' + search+'&count=5').done(function(data) {
-                        console.log(data);
                         // var returnData = data.statuses.map(function(d) {
                         //     return {
                         //         desp: d.text;
                         //         url: ;
                         //     }
                         // })
-                    console.log(data);
                     if (data.statuses.length > 0) {
                             deferred.resolve(data);
+                            obj.collSearch.push(search);
                         }
                         deferred.resolve(data);
                     })
@@ -38,6 +38,7 @@ angular.module('apiIntegrationApp')
                             desp: d.text
                         }
                     })
+                    obj.collSearch.push(search);
                     deferred.resolve(returnData);
                 })
             }

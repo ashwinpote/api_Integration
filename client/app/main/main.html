@@ -39,7 +39,7 @@
                                    <div class="innerbox" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
                                         <div ng-repeat="res in subarr | emptycheckTitle">
                                             <span ng-show="res.text != null" class="text ">{{res.text}}</span>
-                                            <span ng-show="res.entities.urls[0].url != null" class="text"><a ng-href="{{ res.entities.urls[0].url }}" target="_blank">Read more >>></a></span>
+                                           <!--  <span ng-show="res.entities.urls[0].url != null" class="text"><a ng-href="{{ res.entities.urls[0].url }}" target="_blank">Read more >>></a></span> -->
                                             <span ng-show="res.title != null" class="title ">{{res.title}}</span>
                                             <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">Read more>>></a></span>
                                             <span ng-show="res.snippet.description != null" class="title">{{res.snippet.description}}</span>

@@ -14,16 +14,14 @@ angular.module('apiIntegrationApp')
         obj.scopes = 'https://www.googleapis.com/auth/plus.me';
 
         obj.init = function(param) {
-            if (!obj.auth_user) {
+            if (!obj.authUser) {
                 obj.gapi = gapi;
                 obj.gapi.auth.authorize({
                     client_id: obj.clientId,
                     scope: obj.scopes,
                     immediate: false
                 }, obj.handleAuthResult);
-            } else {
-                obj.handleAuthResult(obj.authResult);
-            }
+            } 
             return deferred.promise;
         }
 
@@ -83,6 +81,7 @@ angular.module('apiIntegrationApp')
                         if (resp.result.items.length > 0) {
                             deferred.resolve(resp.result);
                             obj.authUser = true;
+                            obj.collSearch.push(search);
                         }
                     }, function(reason) {
                         console.log('Error: ' + reason.result.error.message);

@@ -49,6 +49,16 @@
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
     </script>
+    <script type="text/javascript">
+    (function() {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
+    </script>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -64,40 +74,33 @@
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/oauthio-web/dist/oauth.min.js"></script>
-     <script src="bower_components/ngDraggable/ngDraggable.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="bower_components/ng-scrollbars/dist/ng-scrollbars.js"></script>
     <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="bower_components/ngDraggable/ngDraggable.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
     <script src="app/app.js"></script>
-    <script src="app/angular-google-plus.js"></script>
-    <script src="app/angular-google-youtube.js"></script>
     <!-- injector:js -->
     <script src="components/util/util.module.js"></script>
-    <script src="app/myService/myService.service.js"></script>
-    <script src="app/app.constant.js"></script>
-    <script src="app/client_plusone.js"></script>
-    <script src="app/client_youtube.js"></script>
-    <script src="app/commonServicegoogleapi/commonServicegoogleapi.service.js"></script>
-    <script src="app/googleplus/googleplus.service.js"></script>
+    <script src="app/twitter/twitter.service.js"></script>
     <script src="app/main/main.controller.js"></script>
     <script src="app/main/main.js"></script>
     <script src="app/myDirective/myDirective.directive.js"></script>
     <script src="app/myFilter/myFilter.filter.js"></script>
-    <script src="app/angular-google-youtube.js"></script>
+    <script src="app/myService/myService.service.js"></script>
     <script src="app/myroute/myroute.controller.js"></script>
     <script src="app/myroute/myroute.js"></script>
-    <script src="app/twitter/twitter.service.js"></script>
+    <script src="app/googleplus/googleplus.service.js"></script>
     <script src="app/user/user.controller.js"></script>
     <script src="app/youtubeService/youtubeService.service.js"></script>
     <script src="components/footer/footer.directive.js"></script>
     <script src="components/modal/modal.service.js"></script>
     <script src="components/navbar/navbar.controller.js"></script>
     <script src="components/navbar/navbar.directive.js"></script>
-    <script src="app/angular-google-plus.js"></script>
+    <script src="app/app.constant.js"></script>
     <script src="components/util/util.service.js"></script>
     <!-- endinjector -->
     <!-- endbuild -->

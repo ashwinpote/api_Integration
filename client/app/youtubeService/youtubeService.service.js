@@ -9,8 +9,8 @@ angular.module('apiIntegrationApp')
         object.gapi = {};
         object.authResult = {};
         object.collSearch = [];
-        object.clientId = '503652870654-62ohhpkan60di1rmpd6nuh418j111393.apps.googleusercontent.com';
-        object.apiKey = 'AIzaSyDSh74BCydxtxx6a5PowltvGrqzsqRHcws';
+        object.clientId = '266935583518-0otsvqdm1eekgr9htkca8lfla26k1l90.apps.googleusercontent.com';
+        object.apiKey = 'AIzaSyAnMX4jucCO6omqJLTUZ4lkqZtDUY_cX2o';
         object.scopes = 'https://www.googleapis.com/auth/youtube';
 
 
@@ -22,9 +22,7 @@ angular.module('apiIntegrationApp')
                     scope: object.scopes,
                     immediate: false
                 }, object.handleAuthResult);
-            } else {
-                object.handleAuthResult(object.authResult);
-            }
+            } 
             return deferred.promise;
         }
 
@@ -81,17 +79,18 @@ angular.module('apiIntegrationApp')
                         object.collSearch.push(search);
                     });
                 });
-            }else {
+            } else {
                 var request = object.gapi.client.youtube.search.list({
-                        part: 'snippet',
-                        type: 'video',
-                        q: "" + search + "",
-                        maxResults: 8
-                    });
-                    request.execute(function(response) {
-                        deferred.resolve(response);
-                        object.auth_user = true;
-                    });
+                    part: 'snippet',
+                    type: 'video',
+                    q: "" + search + "",
+                    maxResults: 8
+                });
+                request.execute(function(response) {
+                    deferred.resolve(response);
+                    object.auth_user = true;
+                    object.collSearch.push(search);
+                });
             }
 
             return deferred.promise;

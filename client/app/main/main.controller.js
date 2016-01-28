@@ -15,7 +15,6 @@
             $scope.search = function() {
                 switch (currSelect) {
                     case "Google+":
-                        //googleplus.init().then(function(data) {
                         var searchText = angular.lowercase($scope.trends);
                         if (googleplus.collSearch.indexOf(searchText) !== -1) {
                             alert(searchText + ' already exists in result list!');
@@ -25,18 +24,20 @@
                                 $scope.mainresult = currArr;
                             });
                         }
-                        console.log(googleplus.collSearch)
-                        //});
                         break;
                     case "Twitter":
-                        twitter.search($scope.trends).then(function(data) {
-                            currArr.push(data.statuses);
-                            console.log(data.statuses)
-                            $scope.mainresult = currArr;
-                        });
+                        var searchText = angular.lowercase($scope.trends);
+                        if (twitter.collSearch.indexOf(searchText) !== -1) {
+                            alert(searchText + ' already exists in result list!');
+                        } else {
+                            twitter.search($scope.trends).then(function(data) {
+                                currArr.push(data.statuses);
+                                console.log(data.statuses)
+                                $scope.mainresult = currArr;
+                            });
+                        }
                         break;
                     case "Youtube":
-                        //youtubeService.init().then(function(data) {
                         var searchText = angular.lowercase($scope.trends);
                         if (youtubeService.collSearch.indexOf(searchText) !== -1) {
                             alert(searchText + ' already exists in result list!');
@@ -46,12 +47,7 @@
                                 $scope.mainresult = currArr;
                             });
                         }
-                        console.log(youtubeService.collSearch)
-
-                        //});
-
                         break;
-
                 }
             }
             $scope.onDropComplete = function(index, obj, evt) {
@@ -63,9 +59,12 @@
             $scope.removeField = function(param) {
                 $scope.mainresult.splice(param, 1);
                 googleplus.collSearch.splice(param, 1);
+                twitter.collSearch.splice(param, 1);
+                youtubeService.collSearch.splice(param, 1);
                 currArr = $scope.mainresult;
-                console.log(currArr);
-                console.log(googleplus.collSearch);
+                console.log(googleplus.collSearch)
+                console.log(twitter.collSearch)
+                console.log(youtubeService.collSearch)
             }
         }
     }

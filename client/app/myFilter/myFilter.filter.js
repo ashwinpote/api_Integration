@@ -11,9 +11,9 @@ angular.module('apiIntegrationApp')
                 }else if(item.text){
 					filteredArray.push(item);
                 }
-                else if(item.entities.urls.url){
-                    filteredArray.push(item);
-                }
+                // else if(item.entities.urls.url){
+                //     filteredArray.push(item);
+                // }
                 else if(item.snippet){
                     if(item.snippet.description){
                         filteredArray.push(item);    

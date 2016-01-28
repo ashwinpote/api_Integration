@@ -6,10 +6,10 @@ angular.module('apiIntegrationApp', [
         'ngResource',
         'ngSanitize',
         'ui.router',
-        'ui.bootstrap',
-        'ngDraggable',
+        'ui.bootstrap',       
         'ngAnimate',
-        'ngScrollbars'
+        'ngScrollbars',
+         'ngDraggable'
     ])
     .config(function($urlRouterProvider, $locationProvider, ScrollBarsProvider) {
         $urlRouterProvider
