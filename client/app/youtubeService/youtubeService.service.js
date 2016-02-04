@@ -2,7 +2,6 @@
 
 angular.module('apiIntegrationApp')
     .service('youtubeService', function($q, commonService) {
-        var deferred = $q.defer();
         var object = {};
         object.collSearch = [];
 
@@ -36,5 +35,18 @@ angular.module('apiIntegrationApp')
             }
             return deferred.promise;
         };
+        object.callapiInterval = function(search) {
+            var deferred = $q.defer();
+            var request = gapi.client.youtube.search.list({
+                part: 'snippet',
+                type: 'video',
+                q: "" + search + "",
+                maxResults: 8
+            });
+            request.execute(function(response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
+        }
         return object;
     });

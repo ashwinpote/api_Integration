@@ -35,10 +35,11 @@
                     <div id="res" class="view">
                         <div id="search-res">
                             <div class="draglist">
-                                <div class="title_data col-lg-3 col-md-3 animate view" ng-repeat="subarr in mainresult" ng-drop="true" ng-drag="true" ng-drag-data="subarr" ng-drop-success="onDropComplete($index, $data,$event)">
+                                <div class="title_data col-lg-3 col-md-3 animate view" ng-repeat="subarr in mainresult" ng-init="outerIndex=$index" ng-drop="true" ng-drag="true" ng-drag-data="subarr" ng-drop-success="onDropComplete($index, $data,$event)">
                                     <div class="innerbox" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
                                         <div ng-repeat="res in subarr | emptycheckTitle">
                                             <span ng-show="res.desp != null" class="text ">{{res.desp}}</span>
+                                            <span ng-show="res.despp != null" class="url "><a ng-href="{{res.despp}}" target="_blank">Read more>>></a></span>
                                             <span ng-show="res.text != null" class="text ">{{res.text}}</span>
                                             <span ng-show="res.title != null" class="title ">{{res.title}}</span>
                                             <span ng-show="res.url != null" class="url "><a ng-href="{{res.url}}" target="_blank">Read more>>></a></span>
@@ -48,7 +49,7 @@
                                             <br>
                                         </div>
                                     </div>
-                                    <i class="fa fa-times-circle close_btn" ng-click="removeField($index)"></i>
+                                    <i data-selapi="{{::currValue }} " class="fa fa-times-circle close_btn" ng-click="removeField($event)"></i>
                                 </div>
                             </div>
                         </div>
