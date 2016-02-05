@@ -2,40 +2,30 @@
 
 angular.module('apiIntegrationApp')
     .service('youtubeService', function($q, commonService) {
-        var object = {};
-        object.collSearch = [];
+        var obj = {};
+        obj.collSearch = [];
 
-        object.search = function(q) {
+        obj.search = function(q) {
             var deferred = $q.defer();
             var search = encodeURIComponent(q);
             if (!commonService.authUser) {
-                commonService.init("Youtube").then(function(data) {
-                    var request = gapi.client.youtube.search.list({
-                        part: 'snippet',
-                        type: 'video',
-                        q: "" + search + "",
-                        maxResults: 8
-                    });
-                    request.execute(function(response) {
-                        deferred.resolve(response);
-                        object.collSearch.push(search);
-                    });
-                });
+                var res = obj.checkResult(search, false);
+                deferred.resolve(res);
             } else {
-                var request = gapi.client.youtube.search.list({
-                    part: 'snippet',
-                    type: 'video',
-                    q: "" + search + "",
-                    maxResults: 8
-                });
-                request.execute(function(response) {
-                    deferred.resolve(response);
-                    object.collSearch.push(search);
-                });
+                var res = obj.checkResult(search, false);
+                deferred.resolve(res);
             }
             return deferred.promise;
         };
-        object.callapiInterval = function(search) {
+
+        obj.callapiInterval = function(search) {
+            var deferred = $q.defer();
+            var res = obj.checkResult(search, true);
+            deferred.resolve(res);
+            return deferred.promise;
+        }
+
+        obj.checkResult = function(search, allowPush) {
             var deferred = $q.defer();
             var request = gapi.client.youtube.search.list({
                 part: 'snippet',
@@ -45,8 +35,11 @@ angular.module('apiIntegrationApp')
             });
             request.execute(function(response) {
                 deferred.resolve(response);
+                if (!allowPush) {
+                    obj.collSearch.push(search);
+                }
             });
             return deferred.promise;
         }
-        return object;
+        return obj;
     });

@@ -3,53 +3,29 @@
 app.service('googleplus', function($q, commonService) {
     var obj = {}
     obj.collSearch = [];
-
+    var deferred = $q.defer();
     obj.search = function(q) {
         var deferred = $q.defer();
         var search = encodeURIComponent(q);
         if (!commonService.authUser) {
             commonService.init("Google+").then(function(data) {
-                var request = gapi.client.request({
-                    'path': '/plus/v1/activities',
-                    'params': {
-                        'query': "" + search + "",
-                        'orderBy': 'best',
-                        'sortBy': 'recent',
-                        'maxResults': '5'
-                    }
-                });
-                request.then(function(resp) {
-                    if (resp.result.items.length > 0) {
-                        deferred.resolve(resp.result);
-                        obj.collSearch.push(search);
-                    }
-                }, function(reason) {
-                    console.log('Error: ' + reason.result.error.message);
-                });
+                var res = obj.checkResult(search, false);
+                deferred.resolve(res);
             });
         } else {
-            var request = gapi.client.request({
-                'path': '/plus/v1/activities',
-                'params': {
-                    'query': "" + search + "",
-                    'orderBy': 'best',
-                    'sortBy': 'recent',
-                    'maxResults': '5'
-                }
-            });
-            request.then(function(resp) {
-                if (resp.result.items.length > 0) {
-                    deferred.resolve(resp.result);
-                    obj.collSearch.push(search);
-                }
-            }, function(reason) {
-                console.log('Error: ' + reason.result.error.message);
-            });
+            obj.checkResult(search, false);
         }
         return deferred.promise;
     };
 
     obj.callapiInterval = function(search) {
+        var deferred = $q.defer();
+        var res = obj.checkResult(search, true);
+        deferred.resolve(res);
+        return deferred.promise;
+    }
+
+    obj.checkResult = function(search, allowPush) {
         var deferred = $q.defer();
         var request = gapi.client.request({
             'path': '/plus/v1/activities',
@@ -63,6 +39,9 @@ app.service('googleplus', function($q, commonService) {
         request.then(function(resp) {
             if (resp.result.items.length > 0) {
                 deferred.resolve(resp.result);
+                if (!allowPush) {
+                    obj.collSearch.push(search);
+                }
             }
         }, function(reason) {
             console.log('Error: ' + reason.result.error.message);
