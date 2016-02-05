@@ -11,6 +11,11 @@
             obj.check_youtube = false;
             $scope.showInputControls = true;
 
+            $scope.scrollbarConfig = {
+                theme: 'dark',
+                scrollInertia: 500
+            }
+
             // $interval(function() {
             //     currArr = [];
             //     $scope.mainresult = null;

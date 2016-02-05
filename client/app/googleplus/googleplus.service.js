@@ -3,7 +3,7 @@
 app.service('googleplus', function($q, commonService) {
     var obj = {}
     obj.collSearch = [];
-    var deferred = $q.defer();
+
     obj.search = function(q) {
         var deferred = $q.defer();
         var search = encodeURIComponent(q);
@@ -13,7 +13,8 @@ app.service('googleplus', function($q, commonService) {
                 deferred.resolve(res);
             });
         } else {
-            obj.checkResult(search, false);
+            var res = obj.checkResult(search, false);
+            deferred.resolve(res);
         }
         return deferred.promise;
     };
