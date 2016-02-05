@@ -14,7 +14,7 @@
                     <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <select class="form-control" id="sel1" ng-model="optionValue" ng-change="onChanged()">
-                                <option selected value="">Select api</option>
+                                <option selected value="">Select Social Sites</option>
                                 <option value="Google+">Google+</option>
                                 <option value="Twitter">Twitter</option>
                                 <option value="Facebook">Facebook</option>
@@ -29,6 +29,8 @@
                             <button class="btn btn-primary" type="button" id="btn-search" ng-click="search()">Search</button>
                             </span>
                         </div>
+                        <span style="color:red" ng-bind="errorMsg">
+                    </span>
                     </div>
                     <br>
                     <br>
