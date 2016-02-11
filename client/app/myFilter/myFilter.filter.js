@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('apiIntegrationApp')
-    .filter('emptycheckTitle', function() {
+app.filter('emptycheckTitle', function() {
         return function(array) {
             var filteredArray = [];
             angular.forEach(array, function(item) {

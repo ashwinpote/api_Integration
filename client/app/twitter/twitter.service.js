@@ -38,7 +38,7 @@ app.service('twitter', function($q, config) {
     }
     obj.callapiInterval = function(search) {
         var deferred = $q.defer();
-        var res = obj.twitterGet(search, false);
+        var res = obj.twitterGet(search, true);
         deferred.resolve(res);
         return deferred.promise;
     }

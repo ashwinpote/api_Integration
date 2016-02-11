@@ -35,7 +35,7 @@ app.config(function($urlRouterProvider, $locationProvider, ScrollBarsProvider) {
 
 app.constant('config', {
     googleClientId: '266935583518-0otsvqdm1eekgr9htkca8lfla26k1l90.apps.googleusercontent.com',
-    googleApiKey: 'AIzaSyAnMX4jucCO6omqJLTUZ4lkqZtDUY_cX2o',    
+    googleApiKey: 'AIzaSyAnMX4jucCO6omqJLTUZ4lkqZtDUY_cX2o',
     googlePlusScope: 'https://www.googleapis.com/auth/plus.me',
     googleYoutubeScope: 'https://www.googleapis.com/auth/youtube',
     twitterApiKey: 'oEcDIQahkO4TUAND-yTs-H6oY_M'

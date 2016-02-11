@@ -10,40 +10,38 @@
             obj.check_googleplus = false;
             obj.check_youtube = false;
             $scope.showInputControls = true;
+            $scope.mainresult = [];
+            $scope.mainresult1 = [];
+            $scope.mainresult2 = [];
 
             $scope.scrollbarConfig = {
                 theme: 'dark',
                 scrollInertia: 500
             }
 
-            // $interval(function() {
-            //     currArr = [];
-            //     $scope.mainresult = null;
-            //     if (obj.check_twitter) {
-            //         twitter.collSearch.forEach(function(value) {
-            //             twitter.callapiInterval(value).then(function(data) {
-            //                 currArr.push(data);
-            //                 $scope.mainresult = currArr;
-            //             });
-            //         });
-            //     }
-            //     if (obj.check_googleplus) {
-            //         angular.forEach(googleplus.collSearch, function(value, key) {
-            //             googleplus.callapiInterval(value).then(function(data) {
-            //                 currArr.push(data.items);
-            //                 $scope.mainresult = currArr;
-            //             });
-            //         });
-            //     }
-            //     if (obj.check_youtube) {
-            //         angular.forEach(youtubeService.collSearch, function(value, key) {
-            //             youtubeService.callapiInterval(value).then(function(data) {
-            //                 currArr.push(data.items);
-            //                 $scope.mainresult = currArr;
-            //             });
-            //         });
-            //     }
-            // }, 20000);
+            $interval(function() {
+                if (obj.check_twitter) {
+                    twitter.collSearch.forEach(function(value, key) {
+                        twitter.callapiInterval(value).then(function(data) {
+                            $scope.mainresult2[key] = data;
+                        });
+                    });
+                }
+                if (obj.check_googleplus) {
+                    googleplus.collSearch.forEach(function(value, key) {
+                        googleplus.callapiInterval(value).then(function(data) {
+                            $scope.mainresult[key] = data.items;
+                        });
+                    });
+                }
+                if (obj.check_youtube) {
+                    youtubeService.collSearch.forEach(function(value, key) {
+                        youtubeService.callapiInterval(value).then(function(data) {
+                            $scope.mainresult1[key] = data.items;
+                        });
+                    });
+                }
+            }, 15000);
 
             $scope.onChanged = function(param) {
                 currSelect = $scope.optionValue;
@@ -60,11 +58,12 @@
                         } else {
                             $scope.errorMsg = "";
                             googleplus.search(searchText).then(function(data) {
-                                currArr.push(data.items);
-                                $scope.mainresult = currArr;
+                                $scope.mainresult.push(data.items);
                                 $scope.currValue = "Google+";
                                 obj.check_googleplus = true;
+                                $scope.reslCount = data.items.length;
                             });
+                            $scope.selIcon = "fa fa-google-plus-square gplusicon";
                         }
                         break;
                     case "Twitter":
@@ -73,11 +72,12 @@
                         } else {
                             $scope.errorMsg = "";
                             twitter.search(searchText).then(function(data) {
-                                currArr.push(data);
-                                $scope.mainresult = currArr;
+                                $scope.mainresult2.push(data);
                                 $scope.currValue = "Twitter";
                                 obj.check_twitter = true;
+                                $scope.reslCount = data.length;
                             });
+                            $scope.selIcon = "fa fa-twitter-square twiticon";
                         }
                         break;
                     case "Youtube":
@@ -86,11 +86,12 @@
                         } else {
                             $scope.errorMsg = "";
                             youtubeService.search(searchText).then(function(data) {
-                                currArr.push(data.items);
-                                $scope.mainresult = currArr;
+                                $scope.mainresult1.push(data.items);
                                 $scope.currValue = "Youtube";
                                 obj.check_youtube = true;
+                                $scope.reslCount = data.items.length;
                             });
+                            $scope.selIcon = "fa fa-youtube-square youtubeicon";
                         }
                         break;
                 }
