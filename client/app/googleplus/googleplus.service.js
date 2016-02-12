@@ -33,8 +33,7 @@ app.service('googleplus', function($q, commonService) {
             'params': {
                 'query': "" + search + "",
                 'orderBy': 'best',
-                'sortBy': 'recent',
-                'maxResults': '5'
+                'sortBy': 'recent'
             }
         });
         request.then(function(resp) {

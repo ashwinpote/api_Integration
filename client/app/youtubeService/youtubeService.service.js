@@ -9,8 +9,10 @@ angular.module('apiIntegrationApp')
             var deferred = $q.defer();
             var search = encodeURIComponent(q);
             if (!commonService.authUser) {
-                var res = obj.checkResult(search, false);
-                deferred.resolve(res);
+                commonService.init("youtube").then(function(data) {
+                    var res = obj.checkResult(search, false);
+                    deferred.resolve(res);
+                });
             } else {
                 var res = obj.checkResult(search, false);
                 deferred.resolve(res);
@@ -30,8 +32,7 @@ angular.module('apiIntegrationApp')
             var request = gapi.client.youtube.search.list({
                 part: 'snippet',
                 type: 'video',
-                q: "" + search + "",
-                maxResults: 8
+                q: "" + search + ""
             });
             request.execute(function(response) {
                 deferred.resolve(response);

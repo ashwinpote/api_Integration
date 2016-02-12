@@ -6,7 +6,7 @@ app.service('twitter', function($q, config) {
 
     obj.twitterGet = function(search, allowPush) {
         var deferred = $q.defer();
-        obj.twitter.get('/1.1/search/tweets.json?q=' + search + '&count=5').done(function(data) {
+        obj.twitter.get('/1.1/search/tweets.json?q=' + search).done(function(data) {
             var returnData = data.statuses.map(function(d) {
                 return {
                     desp: d.text

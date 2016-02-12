@@ -96,11 +96,20 @@
                         break;
                 }
             }
-            $scope.onDropComplete = function(index, obj, evt) {
-                var otherObj = $scope.mainresult[index];
-                var otherIndex = $scope.mainresult.indexOf(obj);
-                $scope.mainresult[index] = obj;
-                $scope.mainresult[otherIndex] = otherObj;
+            $scope.onDropComplete = function(index, obj, evt, checkSelect) {
+                var currObj = [];
+                if (checkSelect == "mainresult") {
+                    currObj = $scope.mainresult;
+                } else if (checkSelect == "mainresult1") {
+                    currObj = $scope.mainresult1;
+                } else if (checkSelect == "mainresult2") {
+                    currObj = $scope.mainresult2;
+                }
+                var otherObj = currObj[index];
+                var otherIndex = currObj.indexOf(obj);
+                currObj[index] = obj;
+                currObj[otherIndex] = otherObj;
+                console.log(checkSelect);
             }
             $scope.removeField = function(param, event) {
                 $scope.mainresult.splice(param, 1);
