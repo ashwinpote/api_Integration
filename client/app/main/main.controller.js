@@ -4,15 +4,14 @@
         constructor(googleplus, twitter, youtubeService, $scope, $location, $window, $interval) {
 
             var currSelect = "";
-            var currArr = [];
             var obj = {};
+            obj.currArr = [];
+            obj.searchText = [];
             obj.check_twitter = false;
             obj.check_googleplus = false;
             obj.check_youtube = false;
             $scope.showInputControls = true;
             $scope.mainresult = [];
-            $scope.mainresult1 = [];
-            $scope.mainresult2 = [];
 
             $scope.scrollbarConfig = {
                 theme: 'dark',
@@ -20,28 +19,27 @@
             }
 
             $interval(function() {
-                if (obj.check_twitter) {
-                    twitter.collSearch.forEach(function(value, key) {
-                        twitter.callapiInterval(value).then(function(data) {
-                            $scope.mainresult2[key] = data;
-                        });
+                if (obj.check_twitter || obj.check_googleplus || obj.check_youtube) {
+                    $scope.mainresult.forEach(function(value, key) {
+                        var api  = $scope.mainresult[key][parseInt(value.length-1)];
+                        var searchtext = $scope.mainresult[key][parseInt(value.length-2)];
+                        if (api == "Google+") {
+                            googleplus.callapiInterval(searchtext).then(function(data) {
+                                $scope.mainresult[key] = data.items.concat(searchtext,api);                               
+                            });                                                                                         
+                        } 
+                        else if (api == "Youtube") {
+                            youtubeService.callapiInterval(searchtext).then(function(data) {
+                                $scope.mainresult[key] = data.items.concat(searchtext,api);
+                            });
+                        } else if (api == "Twitter") {
+                            twitter.callapiInterval(searchtext).then(function(data) {
+                                $scope.mainresult[key] = data.concat(searchtext,api);
+                            });
+                        }
                     });
                 }
-                if (obj.check_googleplus) {
-                    googleplus.collSearch.forEach(function(value, key) {
-                        googleplus.callapiInterval(value).then(function(data) {
-                            $scope.mainresult[key] = data.items;
-                        });
-                    });
-                }
-                if (obj.check_youtube) {
-                    youtubeService.collSearch.forEach(function(value, key) {
-                        youtubeService.callapiInterval(value).then(function(data) {
-                            $scope.mainresult1[key] = data.items;
-                        });
-                    });
-                }
-            }, 15000);
+            }, 10000);
 
             $scope.onChanged = function(param) {
                 currSelect = $scope.optionValue;
@@ -58,7 +56,7 @@
                         } else {
                             $scope.errorMsg = "";
                             googleplus.search(searchText).then(function(data) {
-                                $scope.mainresult.push(data.items);
+                                $scope.mainresult.push(data.items.concat(searchText,"Google+"));
                                 $scope.currValue = "Google+";
                                 obj.check_googleplus = true;
                                 $scope.reslCount = data.items.length;
@@ -72,7 +70,7 @@
                         } else {
                             $scope.errorMsg = "";
                             twitter.search(searchText).then(function(data) {
-                                $scope.mainresult2.push(data);
+                                $scope.mainresult.push(data.concat(searchText,"Twitter"));
                                 $scope.currValue = "Twitter";
                                 obj.check_twitter = true;
                                 $scope.reslCount = data.length;
@@ -86,7 +84,7 @@
                         } else {
                             $scope.errorMsg = "";
                             youtubeService.search(searchText).then(function(data) {
-                                $scope.mainresult1.push(data.items);
+                                $scope.mainresult.push(data.items.concat(searchText,"Youtube"));
                                 $scope.currValue = "Youtube";
                                 obj.check_youtube = true;
                                 $scope.reslCount = data.items.length;
@@ -96,20 +94,11 @@
                         break;
                 }
             }
-            $scope.onDropComplete = function(index, obj, evt, checkSelect) {
-                var currObj = [];
-                if (checkSelect == "mainresult") {
-                    currObj = $scope.mainresult;
-                } else if (checkSelect == "mainresult1") {
-                    currObj = $scope.mainresult1;
-                } else if (checkSelect == "mainresult2") {
-                    currObj = $scope.mainresult2;
-                }
-                var otherObj = currObj[index];
-                var otherIndex = currObj.indexOf(obj);
-                currObj[index] = obj;
-                currObj[otherIndex] = otherObj;
-                console.log(checkSelect);
+            $scope.onDropComplete = function(index, obj, evt) {
+                var otherObj = $scope.mainresult[index];
+                var otherIndex = $scope.mainresult.indexOf(obj);
+                $scope.mainresult[index] = obj;
+                $scope.mainresult[otherIndex] = otherObj;
             }
             $scope.removeField = function(param, event) {
                 $scope.mainresult.splice(param, 1);
@@ -133,7 +122,6 @@
                         }
                         break;
                 }
-                currArr = $scope.mainresult;
             }
         }
     }

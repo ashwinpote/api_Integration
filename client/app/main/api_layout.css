@@ -39,8 +39,9 @@
 }
 
 .innerbox {
-    height: 90%;
+    height: 80%;
     padding-top: 0px;
+    margin-top: 30px;
 }
 
 .faicon {
@@ -274,4 +275,8 @@ width: 25px;
   100%{
     -moz-transform:scale(.3);
   }
+}
+.headerinfo{
+  position: absolute;
+  top:5px;
 }

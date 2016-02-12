@@ -36,6 +36,7 @@ app.service('googleplus', function($q, commonService) {
                 'sortBy': 'recent'
             }
         });
+
         request.then(function(resp) {
             if (resp.result.items.length > 0) {
                 deferred.resolve(resp.result);
