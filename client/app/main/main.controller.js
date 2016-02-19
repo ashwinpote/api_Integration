@@ -45,7 +45,7 @@
                 currSelect = $scope.optionValue;
                 $scope.trends = "";
                 $scope.errorMsg = "";
-            }
+            } 
 
             $scope.search = function() {
                 var searchText = angular.lowercase($scope.trends);
