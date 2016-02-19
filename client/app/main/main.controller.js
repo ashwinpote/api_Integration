@@ -7,11 +7,9 @@
             var obj = {};
             obj.currArr = [];
             obj.searchText = [];
-            obj.check_twitter = false;
-            obj.check_googleplus = false;
-            obj.check_youtube = false;
             $scope.showInputControls = true;
             $scope.mainresult = [];
+            $scope.loader = { "Google+": false, "Twitter": false, "Youtube": false };
 
             $scope.scrollbarConfig = {
                 theme: 'dark',
@@ -19,26 +17,30 @@
             }
 
             $interval(function() {
-                if (obj.check_twitter || obj.check_googleplus || obj.check_youtube) {
-                    $scope.mainresult.forEach(function(value, key) {
-                        var api  = $scope.mainresult[key][parseInt(value.length-1)];
-                        var searchtext = $scope.mainresult[key][parseInt(value.length-2)];
-                        if (api == "Google+") {
-                            googleplus.callapiInterval(searchtext).then(function(data) {
-                                $scope.mainresult[key] = data.items.concat(searchtext,api);                               
-                            });                                                                                         
-                        } 
-                        else if (api == "Youtube") {
-                            youtubeService.callapiInterval(searchtext).then(function(data) {
-                                $scope.mainresult[key] = data.items.concat(searchtext,api);
-                            });
-                        } else if (api == "Twitter") {
-                            twitter.callapiInterval(searchtext).then(function(data) {
-                                $scope.mainresult[key] = data.concat(searchtext,api);
-                            });
-                        }
-                    });
-                }
+                $scope.mainresult.forEach(function(value, key) {
+                    var api = $scope.mainresult[key][parseInt(value.length - 1)];
+                    var searchtext = $scope.mainresult[key][parseInt(value.length - 2)];
+                    if (api == "Google+") {
+                        $scope.loader[key] = true;
+                        googleplus.callapiInterval(searchtext).then(function(data) {
+                            $scope.mainresult[key] = data.items.concat(searchtext, api);
+                            $scope.loader[key] = false;
+
+                        });
+                    } else if (api == "Youtube") {
+                        $scope.loader[key] = true;
+                        youtubeService.callapiInterval(searchtext).then(function(data) {
+                            $scope.mainresult[key] = data.items.concat(searchtext, api);
+                            $scope.loader[key] = false;
+                        });
+                    } else if (api == "Twitter") {
+                        $scope.loader[key] = true;
+                        twitter.callapiInterval(searchtext).then(function(data) {
+                            $scope.mainresult[key] = data.concat(searchtext, api);
+                            $scope.loader[key] = false;
+                        });
+                    }
+                });
             }, 10000);
 
             $scope.onChanged = function(param) {
@@ -49,6 +51,7 @@
 
             $scope.search = function() {
                 var searchText = angular.lowercase($scope.trends);
+                $scope.searchWord = searchText;
                 switch (currSelect) {
                     case "Google+":
                         if (googleplus.collSearch.contains(searchText)) {
@@ -56,7 +59,7 @@
                         } else {
                             $scope.errorMsg = "";
                             googleplus.search(searchText).then(function(data) {
-                                $scope.mainresult.push(data.items.concat(searchText,"Google+"));
+                                $scope.mainresult.push(data.items.concat(searchText, "Google+",data.items.length));
                                 $scope.currValue = "Google+";
                                 obj.check_googleplus = true;
                                 $scope.reslCount = data.items.length;
@@ -70,7 +73,7 @@
                         } else {
                             $scope.errorMsg = "";
                             twitter.search(searchText).then(function(data) {
-                                $scope.mainresult.push(data.concat(searchText,"Twitter"));
+                                $scope.mainresult.push(data.concat(searchText, "Twitter"));
                                 $scope.currValue = "Twitter";
                                 obj.check_twitter = true;
                                 $scope.reslCount = data.length;
@@ -84,7 +87,7 @@
                         } else {
                             $scope.errorMsg = "";
                             youtubeService.search(searchText).then(function(data) {
-                                $scope.mainresult.push(data.items.concat(searchText,"Youtube"));
+                                $scope.mainresult.push(data.items.concat(searchText, "Youtube"));
                                 $scope.currValue = "Youtube";
                                 obj.check_youtube = true;
                                 $scope.reslCount = data.items.length;
@@ -100,41 +103,21 @@
                 $scope.mainresult[index] = obj;
                 $scope.mainresult[otherIndex] = otherObj;
             }
-            $scope.removeField = function(param, event) {
-                $scope.mainresult.splice(param, 1);
+            $scope.removeField = function(index, event) {
+                $scope.mainresult.splice(index, 1);
                 switch (event.target.dataset.selapi) {
                     case 'Google+':
-                        googleplus.collSearch.splice(param, 1);
-                        if (googleplus.collSearch.length == 0) {
-                            obj.check_googleplus = false;
-                        }
+                        googleplus.collSearch.splice(index, 1);
                         break;
                     case 'Twitter':
-                        twitter.collSearch.splice(param, 1);
-                        if (twitter.collSearch.length == 0) {
-                            obj.check_twitter = false;
-                        }
+                        twitter.collSearch.splice(index, 1);
                         break;
                     case 'Youtube':
-                        youtubeService.collSearch.splice(param, 1);
-                        if (youtubeService.collSearch.length == 0) {
-                            obj.check_youtube = false;
-                        }
+                        youtubeService.collSearch.splice(index, 1);
                         break;
                 }
             }
         }
     }
-
-    Array.prototype.contains = function(obj) {
-        var i = this.length;
-        while (i--) {
-            if (this[i] === obj) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     app.controller('MainController', MainController);
 })();

@@ -8,11 +8,7 @@ app.service('commonService', function($q, config) {
     obj.apiKey = config.googleApiKey;
 
     obj.init = function(param) {
-        if (param == "Youtube") {
-            obj.scopes = config.googlePlusScope;
-        } else {
-            obj.scopes = config.googleYoutubeScope;;
-        }
+        obj.scopes = (param == "Youtube") ? config.googlePlusScope : config.googleYoutubeScope;
         if (!obj.authUser) {
             gapi.auth.authorize({
                 client_id: obj.clientId,
@@ -62,5 +58,22 @@ app.service('commonService', function($q, config) {
         }, obj.handleAuthResult);
         return false;
     };
+
+    obj.onDropComplete = function(data, index, obj) {
+        var otherObj = data[index];
+        var otherIndex = data.indexOf(obj);
+        data[index] = obj;
+        data[otherIndex] = otherObj;
+    };
+
+    Array.prototype.contains = function(obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
     return obj;
 });

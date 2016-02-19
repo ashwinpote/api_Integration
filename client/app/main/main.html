@@ -29,7 +29,7 @@
                             <button class="btn btn-primary" type="button" id="btn-search" ng-click="search()">Search</button>
                             </span>
                         </div>
-                        <span style="color:red" ng-bind="errorMsg">
+                        <span class="msgerror" ng-bind="errorMsg">
                     </span>
                     </div>
                     <br>
@@ -38,12 +38,13 @@
                         <div id="search-res">
                             <div class="draglist">
                                 <div class="title_data col-lg-3 col-md-3 animate view" ng-repeat="subarr in mainresult track by $index" ng-init="outerIndex=$index" ng-drop="true" ng-drag="true" ng-drag-data="subarr" ng-drop-success="onDropComplete($index, $data,$event)">
-                                    <div class="headerinfo">
-                                        <i class="{{::selIcon }}"></i>
-                                        <button type="button" class="btn btn-primary badgebtn">{{::trends}} <span class="badge">{{::reslCount }}</span></button>
-                                    </div>
                                     <div class="innerbox" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
                                         <div ng-repeat="res in subarr | emptycheckTitle">
+                                            <div class="headerinfo">
+                                                <i class="{{::selIcon }}"></i>
+                                                <button type="button" class="btn btn-primary badgebtn">{{::searchWord}} <span class="badge">{{::reslCount }}</span></button>
+                                                {{ subarr[$index][10] }}
+                                            </div>
                                             <ul>
                                                 <li ng-show="res.title != null" class="title">{{res.title}}</li>
                                                 <li ng-show="res.desp != null" class="text">{{res.desp}}</li>
@@ -53,7 +54,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div id="circularG">
+                                    <div ng-show="loader[$index]" id="circularG">
                                         <div id="circularG_1" class="circularG"></div>
                                         <div id="circularG_2" class="circularG"></div>
                                         <div id="circularG_3" class="circularG"></div>
@@ -63,7 +64,7 @@
                                         <div id="circularG_7" class="circularG"></div>
                                         <div id="circularG_8" class="circularG"></div>
                                     </div>
-                                    <i data-selapi="{{::currValue }} " class="fa fa-times-circle close_btn" ng-click="removeField($event)"></i>
+                                    <i data-selapi="{{::currValue }}" class="fa fa-times-circle close_btn" ng-click="removeField($index,$event)"></i>
                                 </div>
                             </div>
                         </div>
