@@ -62,5 +62,19 @@ app.service('commonService', function($q, config) {
         }, obj.handleAuthResult);
         return false;
     };
+
+    Array.prototype.contains = function(obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    obj.removeItem = function() {
+
+    }
     return obj;
 });
